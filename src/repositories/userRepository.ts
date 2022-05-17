@@ -17,9 +17,14 @@ async function getByEmail(email: string) {
   });
 }
 
+async function truncate() {
+  await prisma.$executeRaw`TRUNCATE TABLE users`;
+}
+
 const userRepository = {
   create,
   getByEmail,
+  truncate,
 };
 
 export default userRepository;
