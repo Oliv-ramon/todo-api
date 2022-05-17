@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { UserData } from "../repositories/userRepository";
-import userService from "../services/userService";
+import { UserData } from "../repositories/userRepository.js";
+import userService from "../services/userService.js";
 
 async function signUp(req: Request, res: Response) {
   const userData: UserData = req.body;
