@@ -1,10 +1,9 @@
 import Joi from "joi";
 import { UserData } from "../repositories/userRepository";
 
-const signUpSchema = Joi.object<UserData>({
-  name: Joi.string().required(),
+const userSchema = Joi.object<UserData>({
   email: Joi.string().email().required(),
   password: Joi.string().required(),
 });
 
-export default signUpSchema;
+export default userSchema;
