@@ -14,6 +14,6 @@ describe("User Service tests", () => {
 
     expect(async () => {
       await userService.signUp(user);
-    }).rejects.toEqual(conflictError);
+    }).rejects.toEqual(conflictError("this user already have an account"));
   });
 });

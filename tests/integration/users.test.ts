@@ -11,9 +11,7 @@ describe("Users tests", () => {
   it("should return 201 and persist a user given a valid user", async () => {
     const user = userFactory();
 
-    const response = await supertest(app)
-      .post("http://localhost:5000/users")
-      .send(user);
+    const response = await supertest(app).post("/users").send(user);
 
     const userCreated = await userRepository.getByEmail(user.email);
 

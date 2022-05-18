@@ -1,13 +1,8 @@
-import faker from "@faker-js/faker";
+import { faker } from "@faker-js/faker";
 
 export default function userFactory() {
-  console.log(faker);
-  console.log(faker.internet);
-  console.log(faker.internet.email);
-  const user = {
+  return {
     email: faker.internet.email(),
-    password: faker.internet.password(),
+    password: faker.internet.userName(),
   };
-
-  return user;
 }

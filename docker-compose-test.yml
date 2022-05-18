@@ -11,7 +11,7 @@ services:
     container_name: node_app_test
     env_file:
       - .env.test
-    entrypoint: dockerize -wait tcp://db:5432 -timeout 20s docker-entrypoint.sh
+    entrypoint: dockerize -wait tcp://db_test:5432 -timeout 20s docker-entrypoint.sh
     command: "npm run test"
     depends_on:
       - db_test
