@@ -15,16 +15,25 @@ async function signUp(userData: UserData) {
 export type LoginData = Omit<UserData, "name">;
 
 async function login(loginData: LoginData) {
-  const user = await getUserOrfail(loginData.email);
+  const {
+    id: userId,
+    name: userName,
+    password,
+  } = await getUserOrfail(loginData.email);
 
-  validatePassword(loginData.password, user.password);
+  validatePassword(loginData.password, password);
 
   const oneDayInMiliseconds = 24 * 60 * 60 * 100;
-  const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
+  const token = jwt.sign({ userId, userName }, process.env.JWT_SECRET, {
     expiresIn: oneDayInMiliseconds,
   });
 
-  return token;
+  const auth = {
+    userName,
+    token,
+  };
+
+  return auth;
 }
 
 async function validateDuplicateUser(email: string) {
@@ -37,7 +46,6 @@ async function validateDuplicateUser(email: string) {
 
 async function getUserOrfail(email: string) {
   const existingUser = await userRepository.getByEmail(email);
-
   if (!existingUser) {
     throw unauthorizedError("invalid credentials");
   }
@@ -49,7 +57,7 @@ function validatePassword(password: string, encriptedPassword: string) {
   const isValidPassword = bcrypt.compareSync(password, encriptedPassword);
 
   if (!isValidPassword) {
-    throw unauthorizedError("Invalid credentials");
+    throw unauthorizedError("invalid credentials");
   }
 }
 

@@ -13,9 +13,9 @@ async function signUp(req: Request, res: Response) {
 async function login(req: Request, res: Response) {
   const loginData: LoginData = req.body;
 
-  await userService.login(loginData);
+  const auth = await userService.login(loginData);
 
-  res.sendStatus(200);
+  res.status(200).send(auth);
 }
 
 const userController = {
