@@ -4,7 +4,7 @@ import { unauthorizedError } from "../utils/errorUtils.js";
 
 export async function ensureAuthenticatedMiddleware(
   req: Request,
-  res: Response,
+  _res: Response,
   next: NextFunction
 ) {
   const authorization = req.headers["authorization"];
