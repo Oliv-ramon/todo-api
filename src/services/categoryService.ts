@@ -7,13 +7,16 @@ import categoryRepository, {
 export type LoginData = Omit<UserData, "name">;
 
 async function create(categoryData: CategoryData) {
-  await validateDuplicateCategory(categoryData.name);
+  await validateDuplicateCategory(categoryData.userId, categoryData.name);
 
   return categoryRepository.insert(categoryData);
 }
 
-async function validateDuplicateCategory(name: string) {
-  const existingCategory = await categoryRepository.getByName(name);
+async function validateDuplicateCategory(userId: number, name: string) {
+  const existingCategory = await categoryRepository.getByNameAndUserId(
+    userId,
+    name
+  );
 
   if (existingCategory) {
     throw conflictError("this category already exist");

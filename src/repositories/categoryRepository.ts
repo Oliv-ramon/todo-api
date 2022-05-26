@@ -9,16 +9,17 @@ function insert(categoryData: CategoryData) {
   });
 }
 
-function getByName(name: string) {
-  return prisma.category.findUnique({
+function getByNameAndUserId(userId: number, name: string) {
+  return prisma.category.findFirst({
     where: {
+      userId,
       name,
     },
   });
 }
 
 const categoryRepository = {
-  getByName,
+  getByNameAndUserId,
   insert,
 };
 

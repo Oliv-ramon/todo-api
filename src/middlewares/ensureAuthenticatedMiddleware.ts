@@ -4,7 +4,7 @@ import { unauthorizedError } from "../utils/errorUtils.js";
 
 export async function ensureAuthenticatedMiddleware(
   req: Request,
-  _res: Response,
+  res: Response,
   next: NextFunction
 ) {
   const authorization = req.headers["authorization"];
@@ -17,6 +17,8 @@ export async function ensureAuthenticatedMiddleware(
     const { userId } = jwt.verify(token, process.env.JWT_SECRET) as {
       userId: number;
     };
+
+    res.locals.userId = userId;
 
     next();
   } catch {

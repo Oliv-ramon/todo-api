@@ -4,8 +4,9 @@ import categoryService from "../services/categoryService.js";
 
 async function create(req: Request, res: Response) {
   const categoryData: CategoryData = req.body;
+  const { userId } = res.locals;
 
-  await categoryService.create(categoryData);
+  await categoryService.create({ ...categoryData, userId });
 
   res.sendStatus(201);
 }
