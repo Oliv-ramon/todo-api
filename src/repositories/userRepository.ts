@@ -18,7 +18,7 @@ async function getByEmail(email: string) {
 }
 
 async function truncate() {
-  await prisma.$executeRaw`TRUNCATE TABLE users`;
+  await prisma.user.deleteMany();
 }
 
 const userRepository = {

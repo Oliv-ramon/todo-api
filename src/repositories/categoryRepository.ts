@@ -1,5 +1,5 @@
 import { Category } from "@prisma/client";
-import { prisma } from "../database";
+import { prisma } from "../database.js";
 
 export type CategoryData = Omit<Category, "id" | "user">;
 
@@ -18,9 +18,14 @@ function getByNameAndUserId(userId: number, name: string) {
   });
 }
 
+async function truncate() {
+  await prisma.category.deleteMany();
+}
+
 const categoryRepository = {
   getByNameAndUserId,
   insert,
+  truncate,
 };
 
 export default categoryRepository;

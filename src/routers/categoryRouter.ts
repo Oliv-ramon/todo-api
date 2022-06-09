@@ -5,9 +5,9 @@ import { validateSchemaMiddleware } from "../middlewares/validateSchemaMiddlewar
 import categorySchema from "../schemas/categorySchema.js";
 
 const categoryRouter = Router();
-categoryRouter.use(ensureAuthenticatedMiddleware);
 categoryRouter.post(
   "/categories",
+  ensureAuthenticatedMiddleware,
   validateSchemaMiddleware(categorySchema),
   categoryController.create
 );
