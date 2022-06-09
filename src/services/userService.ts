@@ -29,6 +29,7 @@ async function login(loginData: LoginData) {
   });
 
   const auth = {
+    userId,
     userName,
     token,
   };

@@ -1,7 +1,7 @@
-version: "3"
+8version: "3"
 services:
-  db:
-    image: postgres
+  todo-it-postgres:
+    image: postgres:13-alpine
     container_name: db
     ports:
       - 2345:5432
@@ -10,7 +10,7 @@ services:
     volumes:
       - db_volume:/var/lib/postgresql/data
 
-  node_app:
+  todo-it-production:
     container_name: node_app
     build: .
     ports:
@@ -26,4 +26,4 @@ services:
       - db
 
 volumes:
-  db_volume:
+  todo-it-postgres:
