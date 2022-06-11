@@ -12,4 +12,10 @@ categoryRouter.post(
   categoryController.create
 );
 
+categoryRouter.get(
+  "/categories",
+  ensureAuthenticatedMiddleware,
+  categoryController.getAll
+);
+
 export default categoryRouter;

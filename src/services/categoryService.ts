@@ -19,8 +19,14 @@ async function create(categoryData: CreateCategoryData, userId: number) {
   });
 }
 
+async function getAll(userId: number) {
+  await userService.validateUserExistence(userId);
+
+  return categoryRepository.getByUserId(userId);
+}
+
 async function validateDuplicateCategory(userId: number, name: string) {
-  const existingCategory = await categoryUserRepository.getByNameAndUserId(
+  const existingCategory = await categoryRepository.getByNameAndUserId(
     userId,
     name
   );
@@ -32,6 +38,7 @@ async function validateDuplicateCategory(userId: number, name: string) {
 
 const categoryService = {
   create,
+  getAll,
 };
 
 export default categoryService;

@@ -9,26 +9,11 @@ function insert(categoryData: CreateCategoryUserData) {
   });
 }
 
-function getByNameAndUserId(userId: number, name: string) {
-  return prisma.categoryUser.findFirst({
-    where: {
-      userId,
-      category: {
-        name,
-      },
-    },
-    select: {
-      category: true,
-    },
-  });
-}
-
 async function truncate() {
   await prisma.$executeRaw`TRUNCATE "categoriesUsers" RESTART IDENTITY CASCADE`;
 }
 
 const categoryUserRepository = {
-  getByNameAndUserId,
   insert,
   truncate,
 };
