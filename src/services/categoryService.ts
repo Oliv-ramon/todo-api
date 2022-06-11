@@ -1,19 +1,26 @@
 import { UserData } from "../repositories/userRepository.js";
 import { conflictError } from "../utils/errorUtils.js";
 import categoryRepository, {
-  CategoryData,
+  CreateCategoryData,
 } from "../repositories/categoryRepository.js";
+import categoryUserRepository from "../repositories/categoryUserRepository.js";
+import userService from "./userService.js";
 
 export type LoginData = Omit<UserData, "name">;
 
-async function create(categoryData: CategoryData) {
-  await validateDuplicateCategory(categoryData.userId, categoryData.name);
+async function create(categoryData: CreateCategoryData, userId: number) {
+  await userService.validateUserExistence(userId);
+  await validateDuplicateCategory(userId, categoryData.name);
 
-  return categoryRepository.insert(categoryData);
+  const { id: categoryId } = await categoryRepository.insert(categoryData);
+  await categoryUserRepository.insert({
+    categoryId,
+    userId,
+  });
 }
 
 async function validateDuplicateCategory(userId: number, name: string) {
-  const existingCategory = await categoryRepository.getByNameAndUserId(
+  const existingCategory = await categoryUserRepository.getByNameAndUserId(
     userId,
     name
   );
@@ -22,15 +29,6 @@ async function validateDuplicateCategory(userId: number, name: string) {
     throw conflictError("this category already exist");
   }
 }
-
-/* async function getUserOrfail(email: string) {
-  const existingUser = await userRepository.getByEmail(email);
-  if (!existingUser) {
-    throw unauthorizedError("invalid credentials");
-  }
-
-  return existingUser;
-} */
 
 const categoryService = {
   create,

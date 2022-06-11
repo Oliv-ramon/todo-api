@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import { CategoryData } from "../repositories/categoryRepository.js";
+import { CreateCategoryData } from "../repositories/categoryRepository.js";
 import categoryService from "../services/categoryService.js";
 
 async function create(req: Request, res: Response) {
-  const categoryData: CategoryData = req.body;
+  const categoryData: CreateCategoryData = req.body;
   const { userId } = res.locals;
 
-  await categoryService.create({ ...categoryData, userId });
+  await categoryService.create(categoryData, userId);
 
   res.sendStatus(201);
 }

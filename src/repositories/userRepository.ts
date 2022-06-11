@@ -9,6 +9,14 @@ async function insert(userData: UserData) {
   });
 }
 
+async function getById(id: number) {
+  return prisma.user.findUnique({
+    where: {
+      id,
+    },
+  });
+}
+
 async function getByEmail(email: string) {
   return prisma.user.findUnique({
     where: {
@@ -23,6 +31,7 @@ async function truncate() {
 
 const userRepository = {
   insert,
+  getById,
   getByEmail,
   truncate,
 };

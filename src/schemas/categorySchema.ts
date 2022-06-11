@@ -1,7 +1,7 @@
 import Joi from "joi";
-import { CategoryData } from "../repositories/categoryRepository";
+import { CreateCategoryData } from "../repositories/categoryRepository";
 
-const categorySchema = Joi.object<CategoryData>({
+const categorySchema = Joi.object<CreateCategoryData>({
   name: Joi.string().required(),
   color: Joi.string().required(),
   icon: Joi.string().required(),
