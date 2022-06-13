@@ -1,5 +1,5 @@
 import { UserData } from "../repositories/userRepository.js";
-import { conflictError } from "../utils/errorUtils.js";
+import { conflictError, notFoundError } from "../utils/errorUtils.js";
 import categoryRepository, {
   CreateCategoryData,
 } from "../repositories/categoryRepository.js";
@@ -10,7 +10,7 @@ export type LoginData = Omit<UserData, "name">;
 
 async function create(categoryData: CreateCategoryData, userId: number) {
   await userService.validateUserExistence(userId);
-  await validateDuplicateCategory(userId, categoryData.name);
+  await validateDuplicate(userId, categoryData.name);
 
   const { id: categoryId } = await categoryRepository.insert(categoryData);
   await categoryUserRepository.insert({
@@ -25,7 +25,7 @@ async function getAll(userId: number) {
   return categoryRepository.getByUserId(userId);
 }
 
-async function validateDuplicateCategory(userId: number, name: string) {
+async function validateDuplicate(userId: number, name: string) {
   const existingCategory = await categoryRepository.getByNameAndUserId(
     userId,
     name
@@ -36,9 +36,18 @@ async function validateDuplicateCategory(userId: number, name: string) {
   }
 }
 
+async function validateExistence(categoryId: number) {
+  const existingCategory = await categoryRepository.getById(categoryId);
+
+  if (!existingCategory) {
+    throw notFoundError("category not found");
+  }
+}
+
 const categoryService = {
   create,
   getAll,
+  validateExistence,
 };
 
 export default categoryService;

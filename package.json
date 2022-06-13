@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/src/server.js",
-    "dev": "npm run dev:load-envs npx prisma migrate dev && nodemon src/server.ts",
+    "dev": "npm run dev:load-envs nodemon src/server.ts",
     "test": "jest --passWithNoTests --runInBand",
     "docker:test": "docker-compose -f docker-compose-test.yml build --no-cache && docker-compose -f docker-compose-test.yml run --rm node_app_test",
     "dev:load-envs": "dotenv -e .env.development",

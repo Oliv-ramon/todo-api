@@ -9,6 +9,14 @@ function insert(categoryData: CreateCategoryData) {
   });
 }
 
+function getById(categoryId: number) {
+  return prisma.category.findUnique({
+    where: {
+      id: categoryId,
+    },
+  });
+}
+
 function getByNameAndUserId(userId: number, name: string) {
   return prisma.category.findFirst({
     where: {
@@ -40,6 +48,7 @@ async function truncate() {
 
 const categoryRepository = {
   insert,
+  getById,
   getByNameAndUserId,
   getByUserId,
   truncate,

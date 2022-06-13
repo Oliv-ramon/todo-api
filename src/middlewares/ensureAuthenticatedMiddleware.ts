@@ -21,7 +21,8 @@ export async function ensureAuthenticatedMiddleware(
     res.locals.userId = userId;
 
     next();
-  } catch {
+  } catch (err) {
+    console.log(err);
     throw unauthorizedError("Invalid token");
   }
 }
