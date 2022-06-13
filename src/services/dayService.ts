@@ -8,9 +8,11 @@ async function getAll() {
 
 async function validateDaysExistence(days: Day[]) {
   const storedDays = await getAll();
-
+  console.log(storedDays, days);
   days.forEach((day) => {
-    if (!storedDays.includes(day)) {
+    const isIncluded = storedDays.some((storedDay) => storedDay.id === day.id);
+
+    if (!isIncluded) {
       throw badRequestError("days property must to include valid days");
     }
   });

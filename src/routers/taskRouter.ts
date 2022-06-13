@@ -1,5 +1,5 @@
 import { Router } from "express";
-import categoryController from "../controllers/categoryController.js";
+import taskController from "../controllers/taskController.js";
 import { ensureAuthenticatedMiddleware } from "../middlewares/ensureAuthenticatedMiddleware.js";
 import { validateSchemaMiddleware } from "../middlewares/validateSchemaMiddleware.js";
 import createTaskSchema from "../schemas/createTaskSchema.js";
@@ -9,13 +9,13 @@ taskRouter.post(
   "/tasks",
   ensureAuthenticatedMiddleware,
   validateSchemaMiddleware(createTaskSchema),
-  categoryController.create
+  taskController.create
 );
 
-taskRouter.get(
+/* taskRouter.get(
   "/tasks",
   ensureAuthenticatedMiddleware,
   categoryController.getAll
-);
+); */
 
 export default taskRouter;
