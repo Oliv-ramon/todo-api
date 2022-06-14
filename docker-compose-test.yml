@@ -1,17 +1,17 @@
 version: "3"
 services:
-  db_test:
-    image: postgres
-    container_name: db_test
+  todo-it-postgres-test:
+    image: postgres:13-alpine
+    container_name: todo-it-postgres-test
     env_file:
       - .env.test
 
-  node_app_test:
+  todo-it-test:
     build: .
-    container_name: node_app_test
+    container_name: todo-it-test
     env_file:
       - .env.test
-    entrypoint: dockerize -wait tcp://db_test:5432 -timeout 20s docker-entrypoint.sh
-    command: "npm run test"
+    entrypoint: dockerize -wait tcp://todo-it-postgres-test:5432 -timeout 20s docker-entrypoint.sh
+    command: bash -c "npm run test:migration:run && npm t"
     depends_on:
-      - db_test
+      - todo-it-postgres-test

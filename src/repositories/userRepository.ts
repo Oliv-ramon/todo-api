@@ -4,8 +4,16 @@ import { prisma } from "../database.js";
 export type UserData = Omit<User, "id">;
 
 async function insert(userData: UserData) {
-  await prisma.user.create({
+  return prisma.user.create({
     data: userData,
+  });
+}
+
+async function getById(id: number) {
+  return prisma.user.findUnique({
+    where: {
+      id,
+    },
   });
 }
 
@@ -18,11 +26,12 @@ async function getByEmail(email: string) {
 }
 
 async function truncate() {
-  await prisma.$executeRaw`TRUNCATE TABLE users`;
+  await prisma.$executeRaw`TRUNCATE users RESTART IDENTITY CASCADE`;
 }
 
 const userRepository = {
   insert,
+  getById,
   getByEmail,
   truncate,
 };

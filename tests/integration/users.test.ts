@@ -20,7 +20,7 @@ describe("Users tests", () => {
     expect(userCreated).not.toEqual(null);
   });
 
-  it("should return 200 and an auth object signing the user, given valid credentials", async () => {
+  it("should return 200 and an auth object logging the user, given valid credentials", async () => {
     const user = userFactory();
     await userRepository.insert({
       ...user,

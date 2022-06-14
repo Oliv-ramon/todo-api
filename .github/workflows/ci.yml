@@ -11,11 +11,11 @@ jobs:
         with:
           envkey_POSTGRES_USER: "postgres"
           envkey_POSTGRES_PASSWORD: "123456"
-          envkey_POSTGRES_DB: "todo_test"
-          envkey_DATABASE_URL: "postgres://postgres:123456@db_test:5432/todo_test"
+          envkey_POSTGRES_DB: "todo-it-test"
+          envkey_DATABASE_URL: "postgres://postgres:123456@todo-it-postgres-test:5432/todo-it-test"
           envkey_JWT_SECRET: ${{secrets.JWT_SECRET}}
           file_name: .env.test
       - name: Run tests
-        run: docker-compose -f docker-compose-test.yml run node_app_test
+        run: docker-compose -f docker-compose-test.yml run todo-it-test
       - name: Build
         run: npm i && npm run build

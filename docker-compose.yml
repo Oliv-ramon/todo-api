@@ -1,17 +1,17 @@
 version: "3"
 services:
-  db:
-    image: postgres
-    container_name: db
+  todo-it-postgres:
+    image: postgres:13-alpine
+    container_name: todo-it-postgres
     ports:
       - 2345:5432
     env_file:
       - .env
     volumes:
-      - db_volume:/var/lib/postgresql/data
+      - todo-it-postgres:/var/lib/postgresql/data
 
-  node_app:
-    container_name: node_app
+  todo-it-production:
+    container_name: todo-it-production
     build: .
     ports:
       - 5000:5000
@@ -23,7 +23,7 @@ services:
     entrypoint: dockerize -wait tcp://db:5432 -timeout 20s docker-entrypoint.sh
     command: "npm run dev"
     depends_on:
-      - db
+      - todo-it-postgres
 
 volumes:
-  db_volume:
+  todo-it-postgres:

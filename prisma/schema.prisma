@@ -11,10 +11,55 @@ datasource db {
 }
 
 model User {
-  id  Int @id @default(autoincrement())
-  name String 
-  email String @unique
-  password  String
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String @unique
+  password String
+
+  categoriesUsers CategoryUser[]
 
   @@map("users")
+}
+
+model CategoryUser {
+  id         Int @id @default(autoincrement())
+  userId     Int
+  categoryId Int
+
+  user     User     @relation(fields: [userId], references: [id])
+  category Category @relation(fields: [categoryId], references: [id])
+
+  @@map("categoriesUsers")
+}
+
+model Category {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  color String
+  icon  String
+
+  tasks           Task[]
+  categoriesUsers CategoryUser[]
+
+  @@map("categories")
+}
+
+model Day {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  tasks Task[]
+
+  @@map("days")
+}
+
+model Task {
+  id         Int    @id @default(autoincrement())
+  name       String
+  categoryId Int
+
+  category Category @relation(fields: [categoryId], references: [id])
+  days     Day[]
+
+  @@map("tasks")
 }

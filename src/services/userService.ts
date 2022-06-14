@@ -1,5 +1,9 @@
 import userRepository, { UserData } from "../repositories/userRepository.js";
-import { conflictError, unauthorizedError } from "../utils/errorUtils.js";
+import {
+  conflictError,
+  notFoundError,
+  unauthorizedError,
+} from "../utils/errorUtils.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
@@ -29,6 +33,7 @@ async function login(loginData: LoginData) {
   });
 
   const auth = {
+    userId,
     userName,
     token,
   };
@@ -46,6 +51,7 @@ async function validateDuplicateUser(email: string) {
 
 async function getUserOrfail(email: string) {
   const existingUser = await userRepository.getByEmail(email);
+
   if (!existingUser) {
     throw unauthorizedError("invalid credentials");
   }
@@ -61,9 +67,18 @@ function validatePassword(password: string, encriptedPassword: string) {
   }
 }
 
+async function validateUserExistence(userId: number) {
+  const user = await userRepository.getById(userId);
+
+  if (!user) {
+    throw notFoundError("user not found");
+  }
+}
+
 const userService = {
   signUp,
   login,
+  validateUserExistence,
 };
 
 export default userService;
