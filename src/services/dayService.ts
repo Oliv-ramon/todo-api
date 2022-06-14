@@ -8,7 +8,7 @@ async function getAll() {
 
 async function validateDaysExistence(days: Day[]) {
   const storedDays = await getAll();
-  console.log(storedDays, days);
+
   days.forEach((day) => {
     const isIncluded = storedDays.some((storedDay) => storedDay.id === day.id);
 

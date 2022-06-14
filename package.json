@@ -11,7 +11,7 @@
     "test": "jest --passWithNoTests --runInBand",
     "docker:test": "docker-compose -f docker-compose-test.yml build --no-cache && docker-compose -f docker-compose-test.yml run --rm node_app_test",
     "dev:load-envs": "dotenv -e .env.development",
-    "dev:prisma:seed": "npm run dev:load-envs prisma db seed",
+    "dev:seed": "npm run dev:load-envs prisma db seed",
     "dev:prisma:studio": "npm run dev:load-envs prisma studio"
   },
   "keywords": [],

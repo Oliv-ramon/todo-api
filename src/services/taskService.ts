@@ -8,17 +8,14 @@ import dayService from "./dayService.js";
 async function create(createTaskData: CreateTaksData) {
   await dayService.validateDaysExistence(createTaskData.days);
   await categoryService.validateExistence(createTaskData.categoryId);
-  await validateDuplicate(createTaskData.categoryId, createTaskData.name);
+  await validateDuplicate(createTaskData.name);
 
   return taskRepository.insert(createTaskData);
 }
 
-async function validateDuplicate(categoryId: number, name: string) {
-  const existingTask = await taskRepository.getByNameAndCategoryId(
-    categoryId,
-    name
-  );
-
+async function validateDuplicate(name: string) {
+  const existingTask = await taskRepository.getByName(name);
+  console.log(existingTask);
   if (existingTask) {
     throw conflictError("this task already exist");
   }

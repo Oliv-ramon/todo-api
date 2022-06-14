@@ -17,15 +17,20 @@ function insert(createTaskData: CreateTaksData) {
   });
 }
 
-function getByNameAndCategoryId(categoryId: number, name: string) {
+function getByName(name: string) {
   return prisma.task.findFirst({
     where: {
-      name,
-      categoryId,
+      category: {
+        tasks: {
+          some: {
+            name,
+          },
+        },
+      },
     },
   });
 }
 
-const taskRepository = { insert, getByNameAndCategoryId };
+const taskRepository = { insert, getByName };
 
 export default taskRepository;
