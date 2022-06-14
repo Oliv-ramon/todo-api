@@ -51,6 +51,7 @@ async function validateDuplicateUser(email: string) {
 
 async function getUserOrfail(email: string) {
   const existingUser = await userRepository.getByEmail(email);
+
   if (!existingUser) {
     throw unauthorizedError("invalid credentials");
   }

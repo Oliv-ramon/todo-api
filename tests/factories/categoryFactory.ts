@@ -1,9 +1,15 @@
 import { faker } from "@faker-js/faker";
+import { Category } from "@prisma/client";
 
-export default function categoryFactory() {
+interface Params {
+  id?: number;
+}
+
+export default function categoryFactory(params?: Params) {
   return {
     name: faker.word.noun(),
     color: faker.internet.color(),
-    icon: faker.internet.avatar(),
-  };
+    icon: faker.word.noun(),
+    ...params,
+  } as Category;
 }

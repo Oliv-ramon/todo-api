@@ -26,7 +26,7 @@ async function getByEmail(email: string) {
 }
 
 async function truncate() {
-  await prisma.user.deleteMany();
+  await prisma.$executeRaw`TRUNCATE users RESTART IDENTITY CASCADE`;
 }
 
 const userRepository = {
