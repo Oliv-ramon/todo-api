@@ -12,6 +12,6 @@ services:
     env_file:
       - .env.test
     entrypoint: dockerize -wait tcp://todo-it-postgres-test:5432 -timeout 20s docker-entrypoint.sh
-    command: "npm run test"
+    command: bash -c "npm run test:migration:run && npm t"
     depends_on:
       - todo-it-postgres-test
