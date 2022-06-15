@@ -1,9 +1,7 @@
 import { faker } from "@faker-js/faker";
 import { Category } from "@prisma/client";
 
-interface Params {
-  id?: number;
-}
+type Params = Partial<Category>;
 
 export default function categoryFactory(params?: Params) {
   return {

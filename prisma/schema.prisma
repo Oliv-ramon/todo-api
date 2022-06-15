@@ -16,30 +16,20 @@ model User {
   email    String @unique
   password String
 
-  categoriesUsers CategoryUser[]
+  categories Category[]
 
   @@map("users")
 }
 
-model CategoryUser {
-  id         Int @id @default(autoincrement())
-  userId     Int
-  categoryId Int
-
-  user     User     @relation(fields: [userId], references: [id])
-  category Category @relation(fields: [categoryId], references: [id])
-
-  @@map("categoriesUsers")
-}
-
 model Category {
-  id    Int    @id @default(autoincrement())
-  name  String @unique
-  color String
-  icon  String
+  id     Int    @id @default(autoincrement())
+  name   String @unique
+  color  String
+  icon   String
+  userId Int
 
-  tasks           Task[]
-  categoriesUsers CategoryUser[]
+  tasks Task[]
+  user  User   @relation(fields: [userId], references: [id])
 
   @@map("categories")
 }

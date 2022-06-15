@@ -21,11 +21,7 @@ function getByNameAndUserId(userId: number, name: string) {
   return prisma.category.findFirst({
     where: {
       name,
-      categoriesUsers: {
-        every: {
-          userId,
-        },
-      },
+      userId,
     },
   });
 }
@@ -33,11 +29,7 @@ function getByNameAndUserId(userId: number, name: string) {
 function getByUserId(userId: number) {
   return prisma.category.findMany({
     where: {
-      categoriesUsers: {
-        every: {
-          userId,
-        },
-      },
+      userId,
     },
   });
 }

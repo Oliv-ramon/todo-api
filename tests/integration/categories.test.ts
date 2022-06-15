@@ -7,7 +7,9 @@ import authFactory from "../factories/authFactory.js";
 describe("Categories tests", () => {
   beforeEach(async () => {
     await categoryRepository.truncate();
-    jest.resetAllMocks();
+  });
+  afterAll(async () => {
+    await categoryRepository.truncate();
   });
 
   it("should return 201 and create a category given a valid category", async () => {

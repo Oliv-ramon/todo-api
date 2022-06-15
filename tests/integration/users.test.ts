@@ -8,6 +8,9 @@ describe("Users tests", () => {
   beforeEach(async () => {
     await userRepository.truncate();
   });
+  afterAll(async () => {
+    await userRepository.truncate();
+  });
 
   it("should return 201 and persist a user given a valid user", async () => {
     const user = userFactory();

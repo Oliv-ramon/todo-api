@@ -7,11 +7,14 @@ import authFactory from "../factories/authFactory.js";
 describe("Tasks tests", () => {
   beforeEach(async () => {
     await categoryRepository.truncate();
-    jest.resetAllMocks();
+  });
+  afterAll(async () => {
+    await categoryRepository.truncate();
   });
 
   it("should return 201 and create a task given a valid category", async () => {
-    /* const { token, userId } = await authFactory();
+    /* 
+    const { token, userId } = await authFactory();
     const category = categoryFactory();
 
     const response = await supertest(app)
@@ -25,6 +28,7 @@ describe("Tasks tests", () => {
     );
 
     expect(response.status).toEqual(201);
-    expect(categoryCreated).not.toEqual(null); */
+    expect(categoryCreated).not.toEqual(null);
+   */
   });
 });

@@ -5,7 +5,6 @@ import categoryFactory from "../factories/categoryFactory.js";
 import categoryService from "../../src/services/categoryService.js";
 import userFactory from "../factories/userFactory.js";
 import categoryRepository from "../../src/repositories/categoryRepository.js";
-import categoryUserRepository from "../../src/repositories/categoryUserRepository.js";
 
 describe("Category Service tests", () => {
   describe("Creation tests", () => {
@@ -35,12 +34,8 @@ describe("Category Service tests", () => {
     });
 
     it("should call insert functions with the expected params", async () => {
-      const category = categoryFactory({ id: 1 });
       const user = userFactory({ id: 1 });
-      const categoryUser = {
-        userId: user.id,
-        categoryId: category.id,
-      };
+      const category = categoryFactory({ id: 1, userId: user.id });
 
       jest.spyOn(userRepository, "getById").mockResolvedValueOnce(user);
       jest
@@ -49,13 +44,9 @@ describe("Category Service tests", () => {
       const insertCategoryMock = jest
         .spyOn(categoryRepository, "insert")
         .mockResolvedValueOnce(category);
-      const insertCategoryUserMock = jest
-        .spyOn(categoryUserRepository, "insert")
-        .mockResolvedValueOnce(null);
 
       await categoryService.create(category, user.id);
       expect(insertCategoryMock).toBeCalledWith(category);
-      expect(insertCategoryUserMock).toBeCalledWith(categoryUser);
     });
   });
 });
