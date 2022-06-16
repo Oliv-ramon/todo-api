@@ -20,7 +20,7 @@ async function create(categoryData: CreateCategoryData, userId: number) {
 async function getAll(userId: number) {
   await userService.validateUserExistence(userId);
 
-  return categoryRepository.getByUserId(userId);
+  return categoryRepository.getAllByUserId(userId);
 }
 
 async function validateDuplicate(userId: number, name: string) {

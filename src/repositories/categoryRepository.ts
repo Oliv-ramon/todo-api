@@ -26,10 +26,13 @@ function getByNameAndUserId(userId: number, name: string) {
   });
 }
 
-function getByUserId(userId: number) {
+function getAllByUserId(userId: number) {
   return prisma.category.findMany({
     where: {
       userId,
+    },
+    orderBy: {
+      id: "asc",
     },
   });
 }
@@ -42,7 +45,7 @@ const categoryRepository = {
   insert,
   getById,
   getByNameAndUserId,
-  getByUserId,
+  getAllByUserId,
   truncate,
 };
 
