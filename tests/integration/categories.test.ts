@@ -3,13 +3,14 @@ import app from "../../src/app.js";
 import categoryRepository from "../../src/repositories/categoryRepository.js";
 import categoryFactory from "../factories/categoryFactory.js";
 import authFactory from "../factories/authFactory.js";
+import { cleanDb } from "../helpers.js";
 
 describe("Categories tests", () => {
   beforeEach(async () => {
     await categoryRepository.truncate();
   });
   afterAll(async () => {
-    await categoryRepository.truncate();
+    await cleanDb();
   });
 
   it("should return 201 and create a category given a valid category", async () => {
