@@ -17,6 +17,14 @@ function insert(createTaskData: CreateTaksData) {
   });
 }
 
+function getAllByUserId(userId: number) {
+  return prisma.task.findMany({
+    where: {
+      category: { userId },
+    },
+  });
+}
+
 function getByNameAndUserId(name: string, userId: number) {
   return prisma.task.findFirst({
     where: {
@@ -28,10 +36,24 @@ function getByNameAndUserId(name: string, userId: number) {
   });
 }
 
+function getAllByCategoryId(categoryId: number) {
+  return prisma.task.findMany({
+    where: {
+      categoryId,
+    },
+  });
+}
+
 function truncate() {
   return prisma.$executeRaw`TRUNCATE tasks RESTART IDENTITY CASCADE`;
 }
 
-const taskRepository = { insert, getByNameAndUserId, truncate };
+const taskRepository = {
+  insert,
+  getAllByUserId,
+  getByNameAndUserId,
+  getAllByCategoryId,
+  truncate,
+};
 
 export default taskRepository;

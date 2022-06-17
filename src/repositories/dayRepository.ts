@@ -4,7 +4,11 @@ import { prisma } from "../database.js";
 export type CreateCategoryData = Omit<Category, "id" | "user">;
 
 function findAll() {
-  return prisma.day.findMany();
+  return prisma.day.findMany({
+    orderBy: {
+      id: "asc",
+    },
+  });
 }
 
 const dayRepository = {

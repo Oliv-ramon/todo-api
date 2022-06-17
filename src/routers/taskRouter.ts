@@ -12,10 +12,6 @@ taskRouter.post(
   taskController.create
 );
 
-/* taskRouter.get(
-  "/tasks",
-  ensureAuthenticatedMiddleware,
-  categoryController.getAll
-); */
+taskRouter.get("/tasks", ensureAuthenticatedMiddleware, taskController.getAll);
 
 export default taskRouter;
