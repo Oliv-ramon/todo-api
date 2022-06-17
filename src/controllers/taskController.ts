@@ -4,8 +4,9 @@ import taskService from "../services/taskService.js";
 
 async function create(req: Request, res: Response) {
   const taskData: CreateTaksData = req.body;
+  const { userId } = res.locals;
 
-  await taskService.create(taskData);
+  await taskService.create(taskData, userId as number);
 
   res.sendStatus(201);
 }

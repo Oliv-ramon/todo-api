@@ -3,10 +3,14 @@ import bcrypt from "bcrypt";
 import app from "../../src/app.js";
 import userRepository from "../../src/repositories/userRepository.js";
 import userFactory from "../factories/userFactory.js";
+import { cleanDb } from "../helpers.js";
 
 describe("Users tests", () => {
   beforeEach(async () => {
     await userRepository.truncate();
+  });
+  afterAll(async () => {
+    await cleanDb();
   });
 
   it("should return 201 and persist a user given a valid user", async () => {

@@ -3,7 +3,6 @@ import { conflictError, notFoundError } from "../utils/errorUtils.js";
 import categoryRepository, {
   CreateCategoryData,
 } from "../repositories/categoryRepository.js";
-import categoryUserRepository from "../repositories/categoryUserRepository.js";
 import userService from "./userService.js";
 
 export type LoginData = Omit<UserData, "name">;
@@ -12,9 +11,8 @@ async function create(categoryData: CreateCategoryData, userId: number) {
   await userService.validateUserExistence(userId);
   await validateDuplicate(userId, categoryData.name);
 
-  const { id: categoryId } = await categoryRepository.insert(categoryData);
-  await categoryUserRepository.insert({
-    categoryId,
+  return categoryRepository.insert({
+    ...categoryData,
     userId,
   });
 }
@@ -22,7 +20,7 @@ async function create(categoryData: CreateCategoryData, userId: number) {
 async function getAll(userId: number) {
   await userService.validateUserExistence(userId);
 
-  return categoryRepository.getByUserId(userId);
+  return categoryRepository.getAllByUserId(userId);
 }
 
 async function validateDuplicate(userId: number, name: string) {

@@ -17,20 +17,21 @@ function insert(createTaskData: CreateTaksData) {
   });
 }
 
-function getByName(name: string) {
+function getByNameAndUserId(name: string, userId: number) {
   return prisma.task.findFirst({
     where: {
+      name,
       category: {
-        tasks: {
-          some: {
-            name,
-          },
-        },
+        userId,
       },
     },
   });
 }
 
-const taskRepository = { insert, getByName };
+function truncate() {
+  return prisma.$executeRaw`TRUNCATE tasks RESTART IDENTITY CASCADE`;
+}
+
+const taskRepository = { insert, getByNameAndUserId, truncate };
 
 export default taskRepository;
