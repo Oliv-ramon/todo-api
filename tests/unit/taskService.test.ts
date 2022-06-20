@@ -15,7 +15,7 @@ import userRepository from "../../src/repositories/userRepository.js";
 import userFactory from "../factories/userFactory.js";
 
 describe("Task Service tests", () => {
-  describe("Creation tests", () => {
+  describe("create", () => {
     const days = daysFactory();
     const user = userFactory({ id: 1 });
 
@@ -81,6 +81,28 @@ describe("Task Service tests", () => {
       await taskService.create(task, user.id);
 
       expect(insertTaskMock).toBeCalledWith(task);
+    });
+  });
+
+  describe("getOfToday", () => {
+    const user = userFactory({ id: 1 });
+    const category = categoryFactory({ userId: user.id });
+
+    it("should throw a not found error given an invalid userId", async () => {
+      jest.spyOn(userRepository, "getById").mockResolvedValue(null);
+
+      await expect(async () => {
+        await taskService.getOfToday({ categoryId: category.id }, user.id);
+      }).rejects.toEqual(notFoundError("user not found"));
+    });
+
+    it("should throw a not found error given an invalid categoryId", async () => {
+      jest.spyOn(userRepository, "getById").mockResolvedValue(user);
+      jest.spyOn(categoryRepository, "getById").mockResolvedValue(null);
+
+      await expect(async () => {
+        await taskService.getOfToday({ categoryId: 0 }, user.id);
+      }).rejects.toEqual(notFoundError("category not found"));
     });
   });
 });
