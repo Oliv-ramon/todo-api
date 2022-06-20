@@ -19,9 +19,18 @@ async function getAll(_req: Request, res: Response) {
   res.status(200).send(categories);
 }
 
+async function getOfToday(_req: Request, res: Response) {
+  const { userId } = res.locals;
+
+  const categories = await categoryService.getOfToday(userId);
+
+  res.status(200).send(categories);
+}
+
 const categoryController = {
   create,
   getAll,
+  getOfToday,
 };
 
 export default categoryController;

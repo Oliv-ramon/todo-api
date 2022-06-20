@@ -1,18 +1,37 @@
-import { Day, Task } from "@prisma/client";
+import { Day, Prisma } from "@prisma/client";
 import { prisma } from "../database.js";
+import { GetOfTodayQueries } from "../services/taskService.js";
 
-export type CreateTaksData = Omit<Task, "id"> & { days: Day[] };
+export type CreateTaksData = Prisma.TaskCreateInput & {
+  categoryId: number;
+  days: Day[];
+};
 
 function insert(createTaskData: CreateTaksData) {
   return prisma.task.create({
     data: {
       name: createTaskData.name,
-      categoryId: createTaskData.categoryId,
+      category: {
+        connect: { id: createTaskData.categoryId },
+      },
       days: {
         connect: createTaskData.days.map((day) => ({
           id: day.id,
         })),
       },
+    },
+  });
+}
+
+function getOfToday(todayWeekDayId: number, queries?: GetOfTodayQueries) {
+  return prisma.task.findMany({
+    where: {
+      days: {
+        some: {
+          id: todayWeekDayId,
+        },
+      },
+      ...queries,
     },
   });
 }
@@ -32,6 +51,11 @@ function truncate() {
   return prisma.$executeRaw`TRUNCATE tasks RESTART IDENTITY CASCADE`;
 }
 
-const taskRepository = { insert, getByNameAndUserId, truncate };
+const taskRepository = {
+  insert,
+  getAll: getOfToday,
+  getByNameAndUserId,
+  truncate,
+};
 
 export default taskRepository;

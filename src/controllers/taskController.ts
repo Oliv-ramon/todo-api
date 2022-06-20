@@ -11,16 +11,21 @@ async function create(req: Request, res: Response) {
   res.sendStatus(201);
 }
 
-/* async function getAll(_req: Request, res: Response) {
+async function getOfToday(req: Request, res: Response) {
+  const { categoryId } = req.query;
   const { userId } = res.locals;
 
-  const categories = await categoryService.getAll(userId);
+  const tasks = await taskService.getOfToday(
+    { categoryId: Number(categoryId) },
+    userId
+  );
 
-  res.status(200).send(categories);
-} */
+  res.status(200).send(tasks);
+}
 
 const taskController = {
   create,
+  getOfToday,
 };
 
 export default taskController;
