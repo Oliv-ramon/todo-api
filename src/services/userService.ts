@@ -67,7 +67,7 @@ function validatePassword(password: string, encriptedPassword: string) {
   }
 }
 
-async function validateUserExistence(userId: number) {
+async function validateExistence(userId: number) {
   const user = await userRepository.getById(userId);
 
   if (!user) {
@@ -78,7 +78,7 @@ async function validateUserExistence(userId: number) {
 const userService = {
   signUp,
   login,
-  validateUserExistence,
+  validateExistence,
 };
 
 export default userService;

@@ -8,7 +8,7 @@ import dayService from "./dayService.js";
 import userService from "./userService.js";
 
 async function create(createTaskData: CreateTaksData, userId: number) {
-  await userService.validateUserExistence(userId);
+  await userService.validateExistence(userId);
   await dayService.validateDaysExistence(createTaskData.days);
   await categoryService.validateExistence(createTaskData.categoryId);
   await validateDuplicate(createTaskData.name, userId);
@@ -21,7 +21,7 @@ export interface GetOfTodayQueries {
 }
 
 async function getOfToday(queries: GetOfTodayQueries, userId: number) {
-  await userService.validateUserExistence(userId);
+  await userService.validateExistence(userId);
 
   const todayWeekDayId = dayjs().day();
 

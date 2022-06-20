@@ -9,7 +9,7 @@ import dayjs from "dayjs";
 export type LoginData = Omit<UserData, "name">;
 
 async function create(categoryData: CreateCategoryData, userId: number) {
-  await userService.validateUserExistence(userId);
+  await userService.validateExistence(userId);
   await validateDuplicate(userId, categoryData.name);
 
   return categoryRepository.insert({
@@ -19,14 +19,14 @@ async function create(categoryData: CreateCategoryData, userId: number) {
 }
 
 async function getOfToday(userId: number) {
-  await userService.validateUserExistence(userId);
+  await userService.validateExistence(userId);
 
   const todayWeekDayId = dayjs().day();
   return categoryRepository.getAllThatHaveTasksToday(userId, todayWeekDayId);
 }
 
 async function getAll(userId: number) {
-  await userService.validateUserExistence(userId);
+  await userService.validateExistence(userId);
 
   return categoryRepository.getAllByUserId(userId);
 }
