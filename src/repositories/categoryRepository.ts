@@ -8,6 +8,16 @@ function insert(categoryData: CreateCategoryData) {
     data: categoryData,
   });
 }
+function getAllByUserId(userId: number) {
+  return prisma.category.findMany({
+    where: {
+      userId,
+    },
+    orderBy: {
+      id: "asc",
+    },
+  });
+}
 
 function getById(categoryId: number) {
   return prisma.category.findUnique({
@@ -26,10 +36,19 @@ function getByNameAndUserId(userId: number, name: string) {
   });
 }
 
-function getAllByUserId(userId: number) {
+function getAllThatHaveTasksToday(userId: number, todayWeekDayId: number) {
   return prisma.category.findMany({
     where: {
       userId,
+      tasks: {
+        some: {
+          days: {
+            some: {
+              id: todayWeekDayId,
+            },
+          },
+        },
+      },
     },
     orderBy: {
       id: "asc",
@@ -43,9 +62,10 @@ async function truncate() {
 
 const categoryRepository = {
   insert,
+  getAllByUserId,
   getById,
   getByNameAndUserId,
-  getAllByUserId,
+  getAllThatHaveTasksToday,
   truncate,
 };
 

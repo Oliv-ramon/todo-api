@@ -4,6 +4,7 @@ import categoryRepository, {
   CreateCategoryData,
 } from "../repositories/categoryRepository.js";
 import userService from "./userService.js";
+import dayjs from "dayjs";
 
 export type LoginData = Omit<UserData, "name">;
 
@@ -15,6 +16,13 @@ async function create(categoryData: CreateCategoryData, userId: number) {
     ...categoryData,
     userId,
   });
+}
+
+async function getOfToday(userId: number) {
+  await userService.validateUserExistence(userId);
+
+  const todayWeekDayId = dayjs().day();
+  return categoryRepository.getAllThatHaveTasksToday(userId, todayWeekDayId);
 }
 
 async function getAll(userId: number) {
@@ -45,6 +53,7 @@ async function validateExistence(categoryId: number) {
 const categoryService = {
   create,
   getAll,
+  getOfToday,
   validateExistence,
 };
 

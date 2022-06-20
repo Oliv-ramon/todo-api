@@ -11,12 +11,12 @@ async function create(req: Request, res: Response) {
   res.sendStatus(201);
 }
 
-async function getAll(req: Request, res: Response) {
+async function getOfToday(req: Request, res: Response) {
   const { categoryId } = req.query;
   const { userId } = res.locals;
 
-  const tasks = await taskService.getByUserIdOrCategoryId(
-    Number(categoryId),
+  const tasks = await taskService.getOfToday(
+    { categoryId: Number(categoryId) },
     userId
   );
 
@@ -25,7 +25,7 @@ async function getAll(req: Request, res: Response) {
 
 const taskController = {
   create,
-  getAll,
+  getOfToday,
 };
 
 export default taskController;

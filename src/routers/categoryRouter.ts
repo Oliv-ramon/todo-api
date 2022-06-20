@@ -18,4 +18,10 @@ categoryRouter.get(
   categoryController.getAll
 );
 
+categoryRouter.get(
+  "/categories/today",
+  ensureAuthenticatedMiddleware,
+  categoryController.getOfToday
+);
+
 export default categoryRouter;

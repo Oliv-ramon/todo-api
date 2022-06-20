@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import taskRepository, {
   CreateTaksData,
 } from "../repositories/taskRepository.js";
@@ -15,15 +16,20 @@ async function create(createTaskData: CreateTaksData, userId: number) {
   return taskRepository.insert(createTaskData);
 }
 
-async function getByUserIdOrCategoryId(categoryId: number, userId: number) {
+export interface GetOfTodayQueries {
+  categoryId?: number;
+}
+
+async function getOfToday(queries: GetOfTodayQueries, userId: number) {
   await userService.validateUserExistence(userId);
 
-  if (categoryId !== null) {
-    await categoryService.validateExistence(categoryId);
-    return taskRepository.getAllByCategoryId(categoryId);
+  const todayWeekDayId = dayjs().day();
+
+  if (queries.categoryId !== undefined) {
+    await categoryService.validateExistence(queries.categoryId);
   }
 
-  return taskRepository.getAllByUserId(userId);
+  return taskRepository.getAll(todayWeekDayId, queries);
 }
 
 async function validateDuplicate(name: string, userId: number) {
@@ -36,7 +42,7 @@ async function validateDuplicate(name: string, userId: number) {
 
 const taskService = {
   create,
-  getByUserIdOrCategoryId,
+  getOfToday,
 };
 
 export default taskService;

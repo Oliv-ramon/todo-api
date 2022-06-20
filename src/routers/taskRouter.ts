@@ -12,6 +12,10 @@ taskRouter.post(
   taskController.create
 );
 
-taskRouter.get("/tasks", ensureAuthenticatedMiddleware, taskController.getAll);
+taskRouter.get(
+  "/tasks/today",
+  ensureAuthenticatedMiddleware,
+  taskController.getOfToday
+);
 
 export default taskRouter;
