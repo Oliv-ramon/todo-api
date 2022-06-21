@@ -44,9 +44,10 @@ model Day {
 }
 
 model Task {
-  id         Int    @id @default(autoincrement())
+  id         Int     @id @default(autoincrement())
   name       String
   categoryId Int
+  checked    Boolean @default(false)
 
   category Category @relation(fields: [categoryId], references: [id])
   days     Day[]

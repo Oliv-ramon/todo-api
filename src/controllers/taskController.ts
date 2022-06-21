@@ -23,9 +23,18 @@ async function getOfToday(req: Request, res: Response) {
   res.status(200).send(tasks);
 }
 
+async function update(req: Request, res: Response) {
+  const { taskId } = req.params;
+
+  await taskService.update(Number(taskId), req.body);
+
+  res.sendStatus(200);
+}
+
 const taskController = {
   create,
   getOfToday,
+  update,
 };
 
 export default taskController;
