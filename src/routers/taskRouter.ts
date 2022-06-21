@@ -18,4 +18,10 @@ taskRouter.get(
   taskController.getOfToday
 );
 
+taskRouter.patch(
+  "/tasks/:taskId/update",
+  ensureAuthenticatedMiddleware,
+  taskController.update
+);
+
 export default taskRouter;

@@ -1,8 +1,9 @@
 import dayjs from "dayjs";
 import taskRepository, {
   CreateTaksData,
+  UpdateTaskData,
 } from "../repositories/taskRepository.js";
-import { conflictError } from "../utils/errorUtils.js";
+import { conflictError, notFoundError } from "../utils/errorUtils.js";
 import categoryService from "./categoryService.js";
 import dayService from "./dayService.js";
 import userService from "./userService.js";
@@ -29,7 +30,13 @@ async function getOfToday(queries: GetOfTodayQueries, userId: number) {
     await categoryService.validateExistence(queries.categoryId);
   }
 
-  return taskRepository.getAll(todayWeekDayId, queries);
+  return taskRepository.getOfToday(todayWeekDayId, queries);
+}
+
+async function update(taskId: number, taskUpdateData: UpdateTaskData) {
+  await validateExistense(taskId);
+
+  return taskRepository.update(taskId, taskUpdateData);
 }
 
 async function validateDuplicate(name: string, userId: number) {
@@ -40,9 +47,18 @@ async function validateDuplicate(name: string, userId: number) {
   }
 }
 
+async function validateExistense(taskId: number) {
+  const task = await taskRepository.getById(taskId);
+
+  if (!task) {
+    throw notFoundError("task not found");
+  }
+}
+
 const taskService = {
   create,
   getOfToday,
+  update,
 };
 
 export default taskService;

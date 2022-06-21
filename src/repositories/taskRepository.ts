@@ -7,6 +7,8 @@ export type CreateTaksData = Prisma.TaskCreateInput & {
   days: Day[];
 };
 
+export type UpdateTaskData = Prisma.TaskUpdateInput;
+
 function insert(createTaskData: CreateTaksData) {
   return prisma.task.create({
     data: {
@@ -21,6 +23,10 @@ function insert(createTaskData: CreateTaksData) {
       },
     },
   });
+}
+
+function getById(taskId: number) {
+  return prisma.task.findUnique({ where: { id: taskId } });
 }
 
 function getOfToday(todayWeekDayId: number, queries?: GetOfTodayQueries) {
@@ -47,14 +53,25 @@ function getByNameAndUserId(name: string, userId: number) {
   });
 }
 
+function update(taskId: number, taskUpdateData: UpdateTaskData) {
+  return prisma.task.update({
+    where: {
+      id: taskId,
+    },
+    data: taskUpdateData,
+  });
+}
+
 function truncate() {
   return prisma.$executeRaw`TRUNCATE tasks RESTART IDENTITY CASCADE`;
 }
 
 const taskRepository = {
   insert,
-  getAll: getOfToday,
+  getById,
+  getOfToday,
   getByNameAndUserId,
+  update,
   truncate,
 };
 

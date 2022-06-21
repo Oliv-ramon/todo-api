@@ -50,4 +50,22 @@ describe("Tasks tests", () => {
     expect(response.status).toEqual(200);
     expect(response.body.length).toBeGreaterThan(0);
   });
+
+  it("should return 200 and update a task", async () => {
+    const { token, userId } = await authFactory();
+    const category = await createCategoryFactory(userId);
+    const task = await createTaskFactory(category.id);
+
+    const response = await supertest(app)
+      .patch(`/tasks/${task.id}/update`)
+      .set({
+        Authorization: `Bearer ${token}`,
+      })
+      .send({ checked: true });
+
+    const taskUpdated = await taskRepository.getById(task.id);
+
+    expect(response.status).toEqual(200);
+    expect(taskUpdated.checked).toBe(true);
+  });
 });

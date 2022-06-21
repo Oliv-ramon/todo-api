@@ -105,4 +105,17 @@ describe("Task Service tests", () => {
       }).rejects.toEqual(notFoundError("category not found"));
     });
   });
+
+  describe("update", () => {
+    it("should throw a not found error given an id of a unexistent task", async () => {
+      const task = taskFactory({ id: 1, categoryId: 1 });
+      const updateTaskData = { checked: true };
+
+      jest.spyOn(taskRepository, "getById").mockResolvedValueOnce(null);
+
+      await expect(async () => {
+        await taskService.update(task.id, updateTaskData);
+      }).rejects.toEqual(notFoundError("task not found"));
+    });
+  });
 });
