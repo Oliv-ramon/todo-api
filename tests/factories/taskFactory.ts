@@ -6,7 +6,7 @@ import daysFactory from "./daysFactory";
 type Params = Partial<Task> & { categoryId: number; days?: Day[] };
 
 export default function taskFactory(params: Params) {
-  const days: Day[] = daysFactory();
+  const days: Day[] = daysFactory(); //test
 
   return {
     name: faker.word.noun(),
