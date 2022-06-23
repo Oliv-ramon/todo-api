@@ -12,11 +12,7 @@ taskRouter.post(
   taskController.create
 );
 
-taskRouter.get(
-  "/tasks/today",
-  ensureAuthenticatedMiddleware,
-  taskController.getOfToday
-);
+taskRouter.get("/tasks", ensureAuthenticatedMiddleware, taskController.getAll);
 
 taskRouter.patch(
   "/tasks/:taskId/update",

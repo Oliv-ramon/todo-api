@@ -19,18 +19,27 @@ async function create(createTaskData: CreateTaksData, userId: number) {
 
 export interface GetOfTodayQueries {
   categoryId?: number;
+  date?: string;
 }
 
-async function getOfToday(queries: GetOfTodayQueries, userId: number) {
+async function getByDate(queries: GetOfTodayQueries, userId: number) {
   await userService.validateExistence(userId);
 
-  const todayWeekDayId = dayjs().day();
+  if (queries.date === undefined) {
+    return taskRepository.getByUserId(userId);
+  }
+
+  parseQueries(queries);
+
+  const { date } = queries;
+  const weekDayId = dayjs(date).day();
+  delete queries.date;
 
   if (queries.categoryId !== undefined) {
     await categoryService.validateExistence(queries.categoryId);
   }
 
-  return taskRepository.getOfToday(todayWeekDayId, queries);
+  return taskRepository.getByWeekDayId(weekDayId, queries);
 }
 
 async function update(taskId: number, taskUpdateData: UpdateTaskData) {
@@ -55,9 +64,15 @@ async function validateExistense(taskId: number) {
   }
 }
 
+function parseQueries(queries: GetOfTodayQueries) {
+  for (const key in queries) {
+    queries[key] = JSON.parse(queries[key]);
+  }
+}
+
 const taskService = {
   create,
-  getOfToday,
+  getByDate,
   update,
 };
 

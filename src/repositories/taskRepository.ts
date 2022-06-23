@@ -29,15 +29,25 @@ function getById(taskId: number) {
   return prisma.task.findUnique({ where: { id: taskId } });
 }
 
-function getOfToday(todayWeekDayId: number, queries?: GetOfTodayQueries) {
+function getByWeekDayId(weekDayId: number, queries?: GetOfTodayQueries) {
   return prisma.task.findMany({
     where: {
       days: {
         some: {
-          id: todayWeekDayId,
+          id: weekDayId,
         },
       },
       ...queries,
+    },
+  });
+}
+
+function getByUserId(userId: number) {
+  return prisma.task.findMany({
+    where: {
+      category: {
+        userId,
+      },
     },
   });
 }
@@ -69,7 +79,8 @@ function truncate() {
 const taskRepository = {
   insert,
   getById,
-  getOfToday,
+  getByUserId,
+  getByWeekDayId,
   getByNameAndUserId,
   update,
   truncate,

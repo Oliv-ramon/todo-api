@@ -11,14 +11,10 @@ async function create(req: Request, res: Response) {
   res.sendStatus(201);
 }
 
-async function getOfToday(req: Request, res: Response) {
-  const { categoryId } = req.query;
+async function getAll(req: Request, res: Response) {
   const { userId } = res.locals;
 
-  const tasks = await taskService.getOfToday(
-    { categoryId: Number(categoryId) },
-    userId
-  );
+  const tasks = await taskService.getByDate(req.query, userId);
 
   res.status(200).send(tasks);
 }
@@ -33,7 +29,7 @@ async function update(req: Request, res: Response) {
 
 const taskController = {
   create,
-  getOfToday,
+  getAll,
   update,
 };
 
