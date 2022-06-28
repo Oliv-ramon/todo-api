@@ -71,7 +71,7 @@ async function validateExistence(userId: number) {
   const user = await userRepository.getById(userId);
 
   if (!user) {
-    throw notFoundError("user not found");
+    throw unauthorizedError("user not registered");
   }
 }
 

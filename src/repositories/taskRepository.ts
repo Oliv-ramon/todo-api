@@ -1,48 +1,104 @@
-import { Day, Prisma } from "@prisma/client";
+import { Prisma, WeekDay } from "@prisma/client";
 import { prisma } from "../database.js";
 import { GetOfTodayQueries } from "../services/taskService.js";
-
-export type CreateTaksData = Prisma.TaskCreateInput & {
-  categoryId: number;
-  days: Day[];
-};
+import { internalServerError } from "../utils/errorUtils.js";
+import {
+  getWeekDayDate,
+  getNextDayDateFormated,
+} from "../utils/taskRepositoryUtils.js";
+import eventRepository from "./eventRepository.js";
 
 export type UpdateTaskData = Prisma.TaskUpdateInput;
 
-function insert(createTaskData: CreateTaksData) {
-  return prisma.task.create({
-    data: {
-      name: createTaskData.name,
-      category: {
-        connect: { id: createTaskData.categoryId },
-      },
-      days: {
-        connect: createTaskData.days.map((day) => ({
-          id: day.id,
-        })),
-      },
-    },
-  });
+export type CreateTaksData = Prisma.TaskCreateInput & {
+  categoryId: number;
+  weekDays: WeekDay[];
+  times: number;
+};
+
+async function insert(
+  userId: number,
+  { name, categoryId, weekDays, times }: CreateTaksData
+) {
+  try {
+    const taskCreated = await prisma.$transaction(async (prisma) => {
+      const { id: taskId } = await prisma.task.create({
+        data: {
+          name,
+          categoryId,
+        },
+      });
+
+      const eventsToCreate = [];
+
+      for (let i = 0; i < times; i++) {
+        const daysToJump = i * 7;
+
+        eventsToCreate.push(
+          ...weekDays.map(({ id: weekDayId }) => ({
+            userId,
+            taskId,
+            weekDayId,
+            date: getWeekDayDate(weekDayId, daysToJump),
+          }))
+        );
+      }
+
+      await eventRepository.insertMany(eventsToCreate, prisma);
+    });
+
+    return taskCreated;
+  } catch (err) {
+    throw internalServerError(err.message);
+  }
 }
 
-function getById(taskId: number) {
+async function getById(taskId: number) {
   return prisma.task.findUnique({ where: { id: taskId } });
 }
 
-function getByWeekDayId(weekDayId: number, queries?: GetOfTodayQueries) {
+async function getAllByUserIdOrQueries(
+  userId: number,
+  queries?: GetOfTodayQueries
+) {
   return prisma.task.findMany({
     where: {
-      days: {
+      category: {
+        userId,
+      },
+      events: {
         some: {
-          id: weekDayId,
+          date: {
+            gte: queries.date,
+            lt: getNextDayDateFormated(queries.date as Date),
+          },
         },
       },
-      ...queries,
+      categoryId: queries.categoryId,
+    },
+    include: {
+      category: {
+        select: {
+          color: true,
+        },
+      },
+      events: {
+        select: {
+          id: true,
+          checked: true,
+        },
+        where: {
+          date: {
+            gte: queries.date,
+            lt: getNextDayDateFormated(queries.date as Date),
+          },
+        },
+      },
     },
   });
 }
 
-function getByUserId(userId: number) {
+async function getByUserId(userId: number) {
   return prisma.task.findMany({
     where: {
       category: {
@@ -52,7 +108,7 @@ function getByUserId(userId: number) {
   });
 }
 
-function getByNameAndUserId(name: string, userId: number) {
+async function getByNameAndUserId(name: string, userId: number) {
   return prisma.task.findFirst({
     where: {
       name,
@@ -63,7 +119,7 @@ function getByNameAndUserId(name: string, userId: number) {
   });
 }
 
-function update(taskId: number, taskUpdateData: UpdateTaskData) {
+async function update(taskId: number, taskUpdateData: UpdateTaskData) {
   return prisma.task.update({
     where: {
       id: taskId,
@@ -72,7 +128,7 @@ function update(taskId: number, taskUpdateData: UpdateTaskData) {
   });
 }
 
-function truncate() {
+async function truncate() {
   return prisma.$executeRaw`TRUNCATE tasks RESTART IDENTITY CASCADE`;
 }
 
@@ -80,7 +136,7 @@ const taskRepository = {
   insert,
   getById,
   getByUserId,
-  getByWeekDayId,
+  getAllByUserIdOrQueries,
   getByNameAndUserId,
   update,
   truncate,

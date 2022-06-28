@@ -1,28 +1,28 @@
-import dayjs from "dayjs";
 import taskRepository, {
   CreateTaksData,
   UpdateTaskData,
 } from "../repositories/taskRepository.js";
 import { conflictError, notFoundError } from "../utils/errorUtils.js";
 import categoryService from "./categoryService.js";
-import dayService from "./dayService.js";
+import weekDayService from "./weekDayService.js";
 import userService from "./userService.js";
+import { formatDate, parseQueries } from "../utils/taskServiceUtils.js";
 
 async function create(createTaskData: CreateTaksData, userId: number) {
   await userService.validateExistence(userId);
-  await dayService.validateDaysExistence(createTaskData.days);
+  await weekDayService.validateWeekDaysExistence(createTaskData.weekDays);
   await categoryService.validateExistence(createTaskData.categoryId);
   await validateDuplicate(createTaskData.name, userId);
 
-  return taskRepository.insert(createTaskData);
+  return taskRepository.insert(userId, createTaskData);
 }
 
 export interface GetOfTodayQueries {
   categoryId?: number;
-  date?: string;
+  date?: string | Date;
 }
 
-async function getByDate(queries: GetOfTodayQueries, userId: number) {
+async function getAll(queries: GetOfTodayQueries, userId: number) {
   await userService.validateExistence(userId);
 
   if (queries.date === undefined) {
@@ -30,16 +30,13 @@ async function getByDate(queries: GetOfTodayQueries, userId: number) {
   }
 
   parseQueries(queries);
-
-  const { date } = queries;
-  const weekDayId = dayjs(date).day();
-  delete queries.date;
+  queries.date = formatDate(queries.date as string);
 
   if (queries.categoryId !== undefined) {
     await categoryService.validateExistence(queries.categoryId);
   }
 
-  return taskRepository.getByWeekDayId(weekDayId, queries);
+  return taskRepository.getAllByUserIdOrQueries(userId, queries);
 }
 
 async function update(taskId: number, taskUpdateData: UpdateTaskData) {
@@ -64,15 +61,9 @@ async function validateExistense(taskId: number) {
   }
 }
 
-function parseQueries(queries: GetOfTodayQueries) {
-  for (const key in queries) {
-    queries[key] = JSON.parse(queries[key]);
-  }
-}
-
 const taskService = {
   create,
-  getByDate,
+  getAll,
   update,
 };
 

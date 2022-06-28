@@ -1,4 +1,4 @@
-import { days } from "./entities/days.js";
+import { weekDays } from "./entities/weekDays.js";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
@@ -7,8 +7,8 @@ async function main() {
 }
 
 async function createDays() {
-  days.forEach(async (day) => {
-    await prisma.day.upsert({
+  weekDays.forEach(async (day) => {
+    await prisma.weekDay.upsert({
       where: {
         id: day.id,
       },

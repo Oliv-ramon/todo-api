@@ -21,7 +21,7 @@ categoryRouter.get(
 categoryRouter.get(
   "/categories/today",
   ensureAuthenticatedMiddleware,
-  categoryController.getOfToday
+  categoryController.getTodays
 );
 
 export default categoryRouter;

@@ -3,7 +3,8 @@ type AppErrorTypes =
   | "not_found"
   | "unauthorized"
   | "wrong_schema"
-  | "bad_request";
+  | "bad_request"
+  | "internal_server_error";
 export interface AppError {
   type: AppErrorTypes;
   message: string;
@@ -18,6 +19,7 @@ export function errorTypeToStatusCode(type: AppErrorTypes) {
   if (type === "not_found") return 404;
   if (type === "unauthorized") return 401;
   if (type === "wrong_schema") return 422;
+  if (type === "internal_server_error") return 500;
   return 400;
 }
 
@@ -39,4 +41,8 @@ export function unauthorizedError(message?: string): AppError {
 
 export function wrongSchemaError(message?: string): AppError {
   return { type: "wrong_schema", message };
+}
+
+export function internalServerError(message?: string): AppError {
+  return { type: "internal_server_error", message };
 }
