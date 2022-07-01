@@ -1,7 +1,14 @@
+import { Task } from "@prisma/client";
 import taskRepository from "../../src/repositories/taskRepository";
 import taskFactory from "./taskFactory";
 
-export default async function createTaskFactory(categoryId: number) {
-  const task = taskFactory({ categoryId });
-  return taskRepository.insert(task);
+type Params = Partial<Task>;
+
+export default async function createTaskFactory(
+  userId: number,
+  categoryId: number,
+  params?: Params
+) {
+  const task = taskFactory({ categoryId, ...params });
+  return taskRepository.insert(userId, task);
 }

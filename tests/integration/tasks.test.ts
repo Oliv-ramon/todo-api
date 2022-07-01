@@ -7,6 +7,7 @@ import taskRepository from "../../src/repositories/taskRepository.js";
 import createCategoryFactory from "../factories/createCategoryFactory.js";
 import { cleanDb } from "../helpers.js";
 import createTaskFactory from "../factories/createTaskFactory.js";
+import dayjs from "dayjs";
 
 describe("Tasks tests", () => {
   beforeEach(async () => {
@@ -38,14 +39,15 @@ describe("Tasks tests", () => {
   it("should return 200 and today tasks", async () => {
     const { token, userId } = await authFactory();
     const category = await createCategoryFactory(userId);
-    await createTaskFactory(category.id);
+    await createTaskFactory(userId, category.id);
+    const todayDate = JSON.stringify(dayjs());
 
     const response = await supertest(app)
-      .get("/tasks/today")
+      .get("/tasks")
       .set({
         Authorization: `Bearer ${token}`,
       })
-      .query({ categoryId: category.id });
+      .query({ categoryId: category.id.toString(), date: todayDate });
 
     expect(response.status).toEqual(200);
     expect(response.body.length).toBeGreaterThan(0);
@@ -54,18 +56,19 @@ describe("Tasks tests", () => {
   it("should return 200 and update a task", async () => {
     const { token, userId } = await authFactory();
     const category = await createCategoryFactory(userId);
-    const task = await createTaskFactory(category.id);
+    const taskId = 1;
+    await createTaskFactory(userId, category.id, { id: taskId });
 
     const response = await supertest(app)
-      .patch(`/tasks/${task.id}/update`)
+      .patch(`/tasks/${taskId}/update`)
       .set({
         Authorization: `Bearer ${token}`,
       })
-      .send({ checked: true });
+      .send({ name: "newName" });
 
-    const taskUpdated = await taskRepository.getById(task.id);
+    const taskUpdated = await taskRepository.getById(taskId);
 
     expect(response.status).toEqual(200);
-    expect(taskUpdated.checked).toBe(true);
+    expect(taskUpdated.name).toBe("newName");
   });
 });

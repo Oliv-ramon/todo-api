@@ -25,10 +25,6 @@ export interface GetOfTodayQueries {
 async function getAll(queries: GetOfTodayQueries, userId: number) {
   await userService.validateExistence(userId);
 
-  if (queries.date === undefined) {
-    return taskRepository.getByUserId(userId);
-  }
-
   parseQueries(queries);
   queries.date = formatDate(queries.date as string);
 
