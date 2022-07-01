@@ -57,6 +57,7 @@ describe("Category Service tests", () => {
         await categoryService.getTodays(user.id);
       }).rejects.toEqual(unauthorizedError("user not registered"));
     });
+
     it("should call the repository function with the expected params", async () => {
       const user = userFactory({ id: 1 });
 

@@ -8,6 +8,7 @@ import createCategoryFactory from "../factories/createCategoryFactory.js";
 import { cleanDb } from "../helpers.js";
 import createTaskFactory from "../factories/createTaskFactory.js";
 import dayjs from "dayjs";
+import { Category } from "@prisma/client";
 
 describe("Tasks tests", () => {
   beforeEach(async () => {
@@ -19,7 +20,7 @@ describe("Tasks tests", () => {
 
   it("should return 201 and create a task given a valid category", async () => {
     const { token, userId } = await authFactory();
-    const category = await createCategoryFactory(userId);
+    const category = (await createCategoryFactory(userId)) as Category;
     const task = taskFactory({ categoryId: category.id });
 
     const response = await supertest(app)
@@ -38,7 +39,7 @@ describe("Tasks tests", () => {
 
   it("should return 200 and today tasks", async () => {
     const { token, userId } = await authFactory();
-    const category = await createCategoryFactory(userId);
+    const category = (await createCategoryFactory(userId)) as Category;
     await createTaskFactory(userId, category.id);
     const todayDate = JSON.stringify(dayjs());
 
@@ -55,7 +56,7 @@ describe("Tasks tests", () => {
 
   it("should return 200 and update a task", async () => {
     const { token, userId } = await authFactory();
-    const category = await createCategoryFactory(userId);
+    const category = (await createCategoryFactory(userId)) as Category;
     const taskId = 1;
     await createTaskFactory(userId, category.id, { id: taskId });
 

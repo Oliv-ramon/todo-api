@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1656511715092" clover="3.2.0">
-  <project timestamp="1656511715092" name="All files">
-    <metrics statements="405" coveredstatements="351" conditionals="24" coveredconditionals="12" methods="84" coveredmethods="63" elements="513" coveredelements="426" complexity="0" loc="405" ncloc="405" packages="10" files="46" classes="46"/>
+<coverage generated="1656685597265" clover="3.2.0">
+  <project timestamp="1656685597265" name="All files">
+    <metrics statements="418" coveredstatements="378" conditionals="25" coveredconditionals="13" methods="85" coveredmethods="70" elements="528" coveredelements="461" complexity="0" loc="418" ncloc="418" packages="10" files="46" classes="46"/>
     <package name="src">
       <metrics statements="17" coveredstatements="17" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="app.ts" path="/home/ramon/Documents/Projetos-Driven/Projeto_20_todo/backend/src/app.ts">
@@ -32,20 +32,20 @@
       </file>
     </package>
     <package name="src.controllers">
-      <metrics statements="51" coveredstatements="38" conditionals="0" coveredconditionals="0" methods="11" coveredmethods="6"/>
+      <metrics statements="51" coveredstatements="44" conditionals="0" coveredconditionals="0" methods="11" coveredmethods="8"/>
       <file name="categoryController.ts" path="/home/ramon/Documents/Projetos-Driven/Projeto_20_todo/backend/src/controllers/categoryController.ts">
-        <metrics statements="13" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="1"/>
+        <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
         <line num="3" count="3" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
         <line num="7" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
         <line num="11" count="1" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
         <line num="30" count="3" type="stmt"/>
         <line num="36" count="3" type="stmt"/>
       </file>
@@ -110,14 +110,14 @@
         <line num="2" count="3" type="stmt"/>
         <line num="3" count="3" type="stmt"/>
         <line num="5" count="3" type="stmt"/>
-        <line num="10" count="4" type="stmt"/>
-        <line num="11" count="4" type="cond" truecount="0" falsecount="1"/>
-        <line num="13" count="4" type="stmt"/>
-        <line num="14" count="4" type="cond" truecount="0" falsecount="1"/>
-        <line num="16" count="4" type="stmt"/>
-        <line num="17" count="4" type="stmt"/>
-        <line num="21" count="4" type="stmt"/>
-        <line num="23" count="4" type="stmt"/>
+        <line num="10" count="6" type="stmt"/>
+        <line num="11" count="6" type="cond" truecount="0" falsecount="1"/>
+        <line num="13" count="6" type="stmt"/>
+        <line num="14" count="6" type="cond" truecount="0" falsecount="1"/>
+        <line num="16" count="6" type="stmt"/>
+        <line num="17" count="6" type="stmt"/>
+        <line num="21" count="6" type="stmt"/>
+        <line num="23" count="6" type="stmt"/>
         <line num="25" count="0" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
       </file>
@@ -142,16 +142,16 @@
       </file>
     </package>
     <package name="src.repositories">
-      <metrics statements="50" coveredstatements="44" conditionals="2" coveredconditionals="1" methods="24" coveredmethods="19"/>
+      <metrics statements="50" coveredstatements="46" conditionals="2" coveredconditionals="1" methods="24" coveredmethods="21"/>
       <file name="categoryRepository.ts" path="/home/ramon/Documents/Projetos-Driven/Projeto_20_todo/backend/src/repositories/categoryRepository.ts">
-        <metrics statements="10" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="4"/>
+        <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
         <line num="2" count="5" type="stmt"/>
         <line num="3" count="5" type="stmt"/>
         <line num="8" count="4" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
         <line num="24" count="2" type="stmt"/>
         <line num="32" count="5" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
         <line num="64" count="7" type="stmt"/>
         <line num="67" count="5" type="stmt"/>
         <line num="76" count="5" type="stmt"/>
@@ -160,7 +160,7 @@
         <metrics statements="6" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="1"/>
         <line num="2" count="4" type="stmt"/>
         <line num="13" count="0" type="stmt"/>
-        <line num="20" count="3" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
         <line num="31" count="0" type="stmt"/>
         <line num="37" count="4" type="stmt"/>
         <line num="43" count="4" type="stmt"/>
@@ -171,32 +171,32 @@
         <line num="4" count="4" type="stmt"/>
         <line num="5" count="4" type="stmt"/>
         <line num="9" count="4" type="stmt"/>
-        <line num="23" count="3" type="stmt"/>
-        <line num="24" count="3" type="stmt"/>
-        <line num="25" count="3" type="stmt"/>
-        <line num="32" count="3" type="stmt"/>
-        <line num="34" count="3" type="stmt"/>
-        <line num="35" count="3" type="stmt"/>
-        <line num="37" count="3" type="stmt"/>
-        <line num="38" count="21" type="stmt"/>
-        <line num="47" count="3" type="stmt"/>
-        <line num="50" count="3" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="38" count="7" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
         <line num="52" count="0" type="stmt"/>
         <line num="57" count="2" type="stmt"/>
         <line num="64" count="1" type="stmt"/>
         <line num="102" count="0" type="stmt"/>
         <line num="112" count="2" type="stmt"/>
         <line num="123" count="1" type="stmt"/>
-        <line num="132" count="3" type="stmt"/>
+        <line num="132" count="1" type="stmt"/>
         <line num="135" count="4" type="stmt"/>
         <line num="145" count="4" type="stmt"/>
       </file>
       <file name="userRepository.ts" path="/home/ramon/Documents/Projetos-Driven/Projeto_20_todo/backend/src/repositories/userRepository.ts">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
         <line num="2" count="6" type="stmt"/>
-        <line num="7" count="6" type="stmt"/>
-        <line num="13" count="6" type="stmt"/>
-        <line num="21" count="7" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="13" count="8" type="stmt"/>
+        <line num="21" count="9" type="stmt"/>
         <line num="29" count="5" type="stmt"/>
         <line num="32" count="6" type="stmt"/>
         <line num="39" count="6" type="stmt"/>
@@ -322,9 +322,9 @@
       </file>
     </package>
     <package name="src.services">
-      <metrics statements="110" coveredstatements="91" conditionals="12" coveredconditionals="10" methods="24" coveredmethods="18"/>
+      <metrics statements="110" coveredstatements="97" conditionals="12" coveredconditionals="10" methods="24" coveredmethods="20"/>
       <file name="categoryService.ts" path="/home/ramon/Documents/Projetos-Driven/Projeto_20_todo/backend/src/services/categoryService.ts">
-        <metrics statements="23" coveredstatements="17" conditionals="2" coveredconditionals="2" methods="5" coveredmethods="3"/>
+        <metrics statements="23" coveredstatements="23" conditionals="2" coveredconditionals="2" methods="5" coveredmethods="5"/>
         <line num="2" count="5" type="stmt"/>
         <line num="3" count="5" type="stmt"/>
         <line num="6" count="5" type="stmt"/>
@@ -334,12 +334,12 @@
         <line num="14" count="7" type="stmt"/>
         <line num="15" count="6" type="stmt"/>
         <line num="17" count="5" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
+        <line num="24" count="3" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="33" count="3" type="stmt"/>
+        <line num="35" count="2" type="stmt"/>
         <line num="39" count="6" type="stmt"/>
         <line num="44" count="6" type="cond" truecount="1" falsecount="0"/>
         <line num="45" count="1" type="stmt"/>
@@ -416,25 +416,25 @@
         <line num="8" count="6" type="stmt"/>
         <line num="11" count="2" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
-        <line num="26" count="7" type="stmt"/>
-        <line num="28" count="6" type="stmt"/>
-        <line num="30" count="5" type="stmt"/>
-        <line num="31" count="5" type="stmt"/>
-        <line num="35" count="5" type="stmt"/>
-        <line num="41" count="5" type="stmt"/>
+        <line num="26" count="9" type="stmt"/>
+        <line num="28" count="8" type="stmt"/>
+        <line num="30" count="7" type="stmt"/>
+        <line num="31" count="7" type="stmt"/>
+        <line num="35" count="7" type="stmt"/>
+        <line num="41" count="7" type="stmt"/>
         <line num="45" count="2" type="stmt"/>
         <line num="47" count="2" type="cond" truecount="1" falsecount="0"/>
         <line num="48" count="1" type="stmt"/>
-        <line num="53" count="7" type="stmt"/>
-        <line num="55" count="7" type="cond" truecount="1" falsecount="0"/>
+        <line num="53" count="9" type="stmt"/>
+        <line num="55" count="9" type="cond" truecount="1" falsecount="0"/>
         <line num="56" count="1" type="stmt"/>
-        <line num="59" count="6" type="stmt"/>
-        <line num="63" count="6" type="stmt"/>
-        <line num="65" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="59" count="8" type="stmt"/>
+        <line num="63" count="8" type="stmt"/>
+        <line num="65" count="8" type="cond" truecount="1" falsecount="0"/>
         <line num="66" count="1" type="stmt"/>
-        <line num="71" count="16" type="stmt"/>
-        <line num="73" count="16" type="cond" truecount="1" falsecount="0"/>
-        <line num="74" count="2" type="stmt"/>
+        <line num="71" count="22" type="stmt"/>
+        <line num="73" count="22" type="cond" truecount="1" falsecount="0"/>
+        <line num="74" count="4" type="stmt"/>
         <line num="78" count="6" type="stmt"/>
         <line num="84" count="6" type="stmt"/>
       </file>
@@ -472,7 +472,7 @@
         <line num="34" count="6" type="stmt"/>
         <line num="35" count="6" type="stmt"/>
         <line num="38" count="6" type="stmt"/>
-        <line num="39" count="8" type="stmt"/>
+        <line num="39" count="12" type="stmt"/>
         <line num="42" count="6" type="stmt"/>
         <line num="43" count="0" type="stmt"/>
         <line num="46" count="6" type="stmt"/>
@@ -483,16 +483,16 @@
         <line num="1" count="5" type="stmt"/>
         <line num="2" count="5" type="stmt"/>
         <line num="4" count="5" type="stmt"/>
-        <line num="5" count="21" type="stmt"/>
+        <line num="5" count="9" type="stmt"/>
         <line num="11" count="5" type="stmt"/>
-        <line num="12" count="2" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
       </file>
       <file name="taskServiceUtils.ts" path="/home/ramon/Documents/Projetos-Driven/Projeto_20_todo/backend/src/utils/taskServiceUtils.ts">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="1" count="5" type="stmt"/>
         <line num="4" count="5" type="stmt"/>
-        <line num="5" count="5" type="stmt"/>
-        <line num="6" count="5" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
         <line num="9" count="5" type="stmt"/>
         <line num="10" count="3" type="stmt"/>
         <line num="11" count="6" type="stmt"/>
@@ -502,77 +502,90 @@
       <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="helpers.ts" path="/home/ramon/Documents/Projetos-Driven/Projeto_20_todo/backend/tests/helpers.ts">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="3" type="stmt"/>
-        <line num="2" count="3" type="stmt"/>
-        <line num="3" count="3" type="stmt"/>
-        <line num="5" count="3" type="stmt"/>
-        <line num="6" count="3" type="stmt"/>
-        <line num="7" count="3" type="stmt"/>
-        <line num="8" count="3" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
       </file>
     </package>
     <package name="tests.factories">
-      <metrics statements="37" coveredstatements="37" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="8"/>
+      <metrics statements="50" coveredstatements="50" conditionals="1" coveredconditionals="1" methods="9" coveredmethods="9"/>
       <file name="authFactory.ts" path="/home/ramon/Documents/Projetos-Driven/Projeto_20_todo/backend/tests/factories/authFactory.ts">
         <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
         <line num="5" count="2" type="stmt"/>
-        <line num="6" count="4" type="stmt"/>
-        <line num="7" count="4" type="stmt"/>
-        <line num="8" count="4" type="stmt"/>
-        <line num="10" count="4" type="stmt"/>
+        <line num="6" count="6" type="stmt"/>
+        <line num="7" count="6" type="stmt"/>
+        <line num="8" count="6" type="stmt"/>
+        <line num="10" count="6" type="stmt"/>
       </file>
       <file name="categoryFactory.ts" path="/home/ramon/Documents/Projetos-Driven/Projeto_20_todo/backend/tests/factories/categoryFactory.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="4" type="stmt"/>
         <line num="6" count="4" type="stmt"/>
-        <line num="7" count="10" type="stmt"/>
+        <line num="7" count="12" type="stmt"/>
       </file>
       <file name="createCategoryFactory.ts" path="/home/ramon/Documents/Projetos-Driven/Projeto_20_todo/backend/tests/factories/createCategoryFactory.ts">
-        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="5" count="3" type="stmt"/>
-        <line num="6" count="3" type="stmt"/>
-        <line num="8" count="3" type="stmt"/>
+        <metrics statements="14" coveredstatements="14" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="10" count="5" type="cond" truecount="1" falsecount="0"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="14" count="4" type="stmt"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
+        <line num="25" count="3" type="stmt"/>
       </file>
       <file name="createTaskFactory.ts" path="/home/ramon/Documents/Projetos-Driven/Projeto_20_todo/backend/tests/factories/createTaskFactory.ts">
-        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
-        <line num="12" count="2" type="stmt"/>
-        <line num="13" count="2" type="stmt"/>
+        <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="18" count="28" type="stmt"/>
+        <line num="24" count="4" type="stmt"/>
+        <line num="25" count="4" type="stmt"/>
+        <line num="27" count="4" type="stmt"/>
       </file>
       <file name="createUserFactory.ts" path="/home/ramon/Documents/Projetos-Driven/Projeto_20_todo/backend/tests/factories/createUserFactory.ts">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
         <line num="6" count="2" type="stmt"/>
-        <line num="7" count="4" type="stmt"/>
+        <line num="7" count="6" type="stmt"/>
       </file>
       <file name="taskFactory.ts" path="/home/ramon/Documents/Projetos-Driven/Projeto_20_todo/backend/tests/factories/taskFactory.ts">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="4" count="2" type="stmt"/>
-        <line num="8" count="2" type="stmt"/>
-        <line num="9" count="8" type="stmt"/>
-        <line num="10" count="8" type="stmt"/>
-        <line num="12" count="8" type="stmt"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="9" count="10" type="stmt"/>
+        <line num="10" count="10" type="stmt"/>
+        <line num="12" count="10" type="stmt"/>
       </file>
       <file name="userFactory.ts" path="/home/ramon/Documents/Projetos-Driven/Projeto_20_todo/backend/tests/factories/userFactory.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="6" type="stmt"/>
         <line num="8" count="6" type="stmt"/>
-        <line num="9" count="13" type="stmt"/>
+        <line num="9" count="18" type="stmt"/>
       </file>
       <file name="weekDaysFactory.ts" path="/home/ramon/Documents/Projetos-Driven/Projeto_20_todo/backend/tests/factories/weekDaysFactory.ts">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="2" count="9" type="stmt"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="11" type="stmt"/>
       </file>
     </package>
   </project>

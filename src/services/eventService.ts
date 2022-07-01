@@ -12,7 +12,7 @@ async function checkOrUncheck(eventId: number) {
 }
 
 async function validateExistense(eventId: number) {
-  const event = eventRepository.getById(eventId);
+  const event = await eventRepository.getById(eventId);
 
   if (!event) {
     throw notFoundError("event not found");
