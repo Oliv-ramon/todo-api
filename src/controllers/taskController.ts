@@ -14,7 +14,7 @@ async function create(req: Request, res: Response) {
 async function getAll(req: Request, res: Response) {
   const { userId } = res.locals;
 
-  const tasks = await taskService.getByDate(req.query, userId);
+  const tasks = await taskService.getAll(req.query, userId);
 
   res.status(200).send(tasks);
 }

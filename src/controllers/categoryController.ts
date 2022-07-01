@@ -19,10 +19,10 @@ async function getAll(_req: Request, res: Response) {
   res.status(200).send(categories);
 }
 
-async function getOfToday(_req: Request, res: Response) {
+async function getTodays(_req: Request, res: Response) {
   const { userId } = res.locals;
 
-  const categories = await categoryService.getOfToday(userId);
+  const categories = await categoryService.getTodays(userId);
 
   res.status(200).send(categories);
 }
@@ -30,7 +30,7 @@ async function getOfToday(_req: Request, res: Response) {
 const categoryController = {
   create,
   getAll,
-  getOfToday,
+  getTodays,
 };
 
 export default categoryController;

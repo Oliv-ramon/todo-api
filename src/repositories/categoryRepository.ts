@@ -1,5 +1,6 @@
 import { Category } from "@prisma/client";
 import { prisma } from "../database.js";
+import { getNextDayDateFormated } from "../utils/taskRepositoryUtils.js";
 
 export type CreateCategoryData = Omit<Category, "id" | "user">;
 
@@ -36,15 +37,18 @@ function getByNameAndUserId(userId: number, name: string) {
   });
 }
 
-function getAllThatHaveTasksToday(userId: number, todayWeekDayId: number) {
+function getAllThatHaveTasksToday(userId: number, todayDate: Date) {
   return prisma.category.findMany({
     where: {
       userId,
       tasks: {
         some: {
-          days: {
+          events: {
             some: {
-              id: todayWeekDayId,
+              date: {
+                gte: todayDate,
+                lt: getNextDayDateFormated(todayDate),
+              },
             },
           },
         },

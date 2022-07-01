@@ -3,7 +3,8 @@ import { CreateTaksData } from "../repositories/taskRepository";
 
 const createTaskSchema = Joi.object<CreateTaksData>({
   name: Joi.string().required(),
-  days: Joi.array().min(1).required(),
+  weekDays: Joi.array().min(1).required(),
+  times: Joi.number().min(1).required(),
   categoryId: Joi.number().required(),
 });
 

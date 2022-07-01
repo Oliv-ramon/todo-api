@@ -1,17 +1,19 @@
 import { faker } from "@faker-js/faker";
-import { Day, Task } from "@prisma/client";
+import { Task, WeekDay } from "@prisma/client";
 import { CreateTaksData } from "../../src/repositories/taskRepository";
-import daysFactory from "./daysFactory";
+import weekDaysFactory from "./weekDaysFactory";
 
-type Params = Partial<Task> & { categoryId: number; days?: Day[] };
+type Params = Partial<Task> & { categoryId: number; weekDays?: WeekDay[] };
 
 export default function taskFactory(params: Params) {
-  const days: Day[] = daysFactory(); //test
+  const weekDays = weekDaysFactory(); //test
+  const times = 1;
 
   return {
     name: faker.word.noun(),
     categoryId: params.categoryId,
-    days,
+    weekDays,
+    times,
     ...params,
   } as Task & CreateTaksData;
 }

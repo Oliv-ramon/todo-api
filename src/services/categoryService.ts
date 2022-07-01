@@ -5,6 +5,8 @@ import categoryRepository, {
 } from "../repositories/categoryRepository.js";
 import userService from "./userService.js";
 import dayjs from "dayjs";
+import { getWeekDayDate } from "../utils/taskRepositoryUtils.js";
+import { formatDate } from "../utils/taskServiceUtils.js";
 
 export type LoginData = Omit<UserData, "name">;
 
@@ -18,11 +20,13 @@ async function create(categoryData: CreateCategoryData, userId: number) {
   });
 }
 
-async function getOfToday(userId: number) {
+async function getTodays(userId: number) {
   await userService.validateExistence(userId);
 
   const todayWeekDayId = dayjs().day();
-  return categoryRepository.getAllThatHaveTasksToday(userId, todayWeekDayId);
+  const todayDate = formatDate(getWeekDayDate(todayWeekDayId, 0));
+
+  return categoryRepository.getAllThatHaveTasksToday(userId, todayDate);
 }
 
 async function getAll(userId: number) {
@@ -53,7 +57,7 @@ async function validateExistence(categoryId: number) {
 const categoryService = {
   create,
   getAll,
-  getOfToday,
+  getTodays,
   validateExistence,
 };
 
