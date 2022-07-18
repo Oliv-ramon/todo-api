@@ -8,6 +8,11 @@ import weekDayService from "./weekDayService.js";
 import userService from "./userService.js";
 import { formatDate, parseQueries } from "../utils/taskServiceUtils.js";
 
+export interface GetOfTodayQueries {
+  categoryId?: number;
+  date?: string | Date;
+}
+
 async function create(createTaskData: CreateTaksData, userId: number) {
   await userService.validateExistence(userId);
   await weekDayService.validateWeekDaysExistence(createTaskData.weekDays);
@@ -15,11 +20,6 @@ async function create(createTaskData: CreateTaksData, userId: number) {
   await validateDuplicate(createTaskData.name, userId);
 
   return taskRepository.insert(userId, createTaskData);
-}
-
-export interface GetOfTodayQueries {
-  categoryId?: number;
-  date?: string | Date;
 }
 
 async function getAll(queries: GetOfTodayQueries, userId: number) {

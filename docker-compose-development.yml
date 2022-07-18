@@ -1,0 +1,29 @@
+version: "3"
+services:
+  todo-it-postgres-development:
+    image: postgres:13-alpine
+    container_name: todo-it-postgres-development
+    ports:
+      - 2345:5432
+    env_file:
+      - .env.development
+    volumes:
+      - todo-it-postgres-development:/var/lib/postgresql/data
+
+  todo-it-development:
+    container_name: todo-it-development
+    build: .
+    ports:
+      - 5000:5000
+    env_file:
+      - .env.development
+    volumes:
+      - .:/usr/src
+      - /usr/src/node_modules
+    entrypoint: dockerize -wait tcp://todo-it-postgres-development:5432 -timeout 20s docker-entrypoint.sh
+    command: "npm run dev"
+    depends_on:
+      - todo-it-postgres-development
+
+volumes:
+  todo-it-postgres-development:

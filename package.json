@@ -17,7 +17,8 @@
     "dev:load-envs": "dotenv -e .env.development",
     "test:load-envs": "dotenv -e .env.test",
     "dev:seed": "npm run dev:load-envs prisma db seed",
-    "dev:prisma:studio": "npm run dev:load-envs prisma studio"
+    "dev:prisma:studio": "npm run dev:load-envs prisma studio",
+    "dev:docker": "docker-compose -f docker-compose-development.yml up --remove-orphans"
   },
   "keywords": [],
   "author": "",
